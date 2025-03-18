@@ -1,6 +1,5 @@
 # my-portfolio
 
- Portfolio - Análisis de Datos y Economía
 ¡Bienvenido a mi portafolio! Soy [Luis Alberto Sanchez Montes], economista con especialización en análisis de datos, interesado en transformar información en conocimientos valiosos para la toma de decisiones estratégicas.
 
  Sobre mí: 
