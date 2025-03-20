@@ -26,8 +26,10 @@ Los datos se obtuvieron de un archivo excel de un curso de Power Bi de cousera."
   
 **Modelos relacionales**
 - Después de eliminar las tablas duplicada nos quedamos con cuatro tablas para trabajar:
+- 
    -La tabla de clientes con su columna de  identificador único llamada customers ID,para conectar con la tabla de ventas de los tres meses.En la tabla sales oct,nov,dic;creamos una columna llamada ID_Venta de valores Únicos,con su identificación única y combianciones únicas de  su categoria y estado donde se adquirió el producto,para poder relacionar diferentes  atributos de la tabla sales oct,nov y dic y la tabla Total Q4 Regional Sales,con la tabla clientes"Customers".
-   -Construimos una tabla puente,con una columna Única y de valores únicos llamada category_state,creada con la combinación de las columnas  de categoría del producto y su estado geográfico donde se realizo la compra,con el fin de generar valores Únicos y conectarlas.
+  
+   -Construimos una tabla puente,con una columna Única y de valores únicos llamada category_state,creada con la combinación de las columnas  de categoría del producto y su estado geográfico donde se realizó la compra,con el fin de generar valores Únicos y conectarlas.
     
   
   
