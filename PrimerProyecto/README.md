@@ -31,7 +31,7 @@ Los datos se obtuvieron de un archivo excel de un curso de Power Bi de cousera."
   
    -Construimos una tabla puente,con una columna Única y de valores únicos llamada category_state,creada con la combinación de las columnas  de categoría del producto y su estado geográfico donde se realizó la compra,con el fin de generar valores Únicos y conectarlas.
 
-    ![modelo relacionar,Power Bi,ventas](modelo relacional,ventas.png)
+    ![modelo relacionar,Power Bi,ventas](https://github.com/luismontes031/my-portfolio/blob/main/PrimerProyecto/modelo%20relacional,ventas.png?raw=true))
 
   
   
