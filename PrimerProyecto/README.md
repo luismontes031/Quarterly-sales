@@ -47,11 +47,11 @@ Se observa un gráfico de columnas agrupadas que clasifica, por mes, el total de
 
 Junto al gráfico de columnas agrupadas, se encuentran otras tarjetas que indican el porcentaje de crecimiento o decrecimiento por producto y su categoría de un mes a otro, así como el total acumulado de los meses.
 
-**Código y Detalles Técnicos**
-**Medidas DAX:**
+## Código y Detalles Técnicos**
+###**Medidas DAX:**
 
-*cliente_MayorGasto*"calcula que cliente gasto mas dinero en sus compras"
-
+**`cliente_MayorGasto`** *"calcula qué cliente gastó más dinero en sus compras"*
+```DAX
 Cliente_MayorGasto = 
 VAR TablaClientes =
     ADDCOLUMNS(
@@ -63,7 +63,8 @@ VAR ClienteTop =
 RETURN
     CONCATENATEX(ClienteTop, 'Customers'[fullname], ", ")
 
-*cliente_MenorGasto*"calcula que cliente gasto menos dinero en sus compras"
+**`cliente_MenorGasto`** *"calcula que cliente gasto menos dinero en sus compras"*
+```DAX
 Cliente_MenorGasto = 
 VAR TablaClientes =
     ADDCOLUMNS(
@@ -75,16 +76,16 @@ VAR ClienteBottom =
 RETURN
     CONCATENATEX(ClienteBottom, 'Customers'[fullname], ", ")
 
-*crecimiento_Dic*"crecimiento de ventas en porcentaje,el mes diciembre"
-
+**`crecimiento_Dic`** *"crecimiento de ventas en porcentaje,el mes diciembre"*
+```DAX
 Crecimiento_Dic = 
 IF(
     ISBLANK([total ventas_noviembre]), 
     BLANK(), 
     ([total ventas_december] - [total ventas_noviembre]) / [total ventas_noviembre]
 )
-*crecimiento_Nov*"crecimiento de ventas en porcentaje,el mes Noviembre"
-
+**`crecimiento_Nov`** *"crecimiento de ventas en porcentaje,el mes Noviembre"*
+```DAX
 Crecimiento_Nov = 
 IF(
     ISBLANK([total ventas_october]), 
@@ -92,8 +93,8 @@ IF(
     ([total ventas_noviembre] - [total ventas_october]) / [total ventas_october]
 )
 
-
-*crecimiento_total_Oct_Dic*"crecimiento de ventas en porcentaje,durante los tres meses"
+**`crecimiento_total_Oct_Dic`** *"crecimiento de ventas en porcentaje,durante los tres meses"*
+```DAX
 
 Crecimiento_Total_Oct_Dic = 
     VAR Crec_Oct_Nov = [Crecimiento_Nov]
@@ -101,8 +102,8 @@ Crecimiento_Total_Oct_Dic =
     RETURN 
         Crec_Oct_Nov + Crec_Nov_Dic
 
-*Producto_Mas_Vendido*"producto más vendido según su Categoria y Estado donde se compró"
-
+**`Producto_Mas_Vendido`** *"producto más vendido según su Categoria y Estado donde se compró"*
+```DAX
 Producto_Mas_Vendido = 
 VAR Producto_Max = 
     TOPN(1, 'Total Q4 Regional Sales', 
@@ -113,8 +114,8 @@ VAR Producto_Max =
 RETURN
     CONCATENATEX(Producto_Max, 'Total Q4 Regional Sales'[Product Category], ", ")
 
-*Producto_MasComprado_TopCliente*"producto mas comprado por cliente"
-
+**`Producto_MasComprado_TopCliente`** *"producto mas comprado por cliente"*
+```DAX
 Producto_MasComprado_TopCliente = 
 VAR TopClienteTabla =
     CALCULATETABLE(
@@ -144,9 +145,8 @@ VAR ProductoTop =
 RETURN
     CONCATENATEX(ProductoTop, 'sales oct,nov,dic'[Product Category], ", ")
 
-
-*Producto_Mayor_crecimiento*"producto con mayor crecimiento de compra durante los tres meses"
-
+**`Producto_Mayor_crecimiento`** *"producto con mayor crecimiento de compra durante los tres meses"*
+DAX```
 Producto_Mayor_Crecimiento = 
     SELECTCOLUMNS(
         TOPN(1, 
@@ -157,8 +157,8 @@ Producto_Mayor_Crecimiento =
         "Producto", 'Total Q4 Regional Sales'[Category_State]
     )
 
-*Producto_Mayor_decrecimiento*producto con mayor decrecimiento de compra durante los tres meses"
-
+**`Producto_Mayor_decrecimiento`** *"producto con mayor decrecimiento de compra durante los tres meses"*
+DAX```
 Producto_Mayor_Decrecimiento = 
     SELECTCOLUMNS(
         TOPN(1, 
@@ -170,12 +170,13 @@ Producto_Mayor_Decrecimiento =
     )
 
 
-*Total_Ventas_totales*"total de ventas por los tres meses"
+**`Total_Ventas_totales`** *"total de ventas por los tres meses"*
+DAX```
 Ventas_Totales_Oct_Dic = 
     [total ventas_october]+ [total ventas_noviembre] + [total ventas_december]
 
-*Totalventasporcliente*"compras totales por cada cliente"
-
+**`Totalventasporcliente`** *"compras totales por cada cliente"*
+DAX```
 TotalVentasPorCliente = 
 CALCULATE(
     SUM('Total Q4 Regional Sales'[Sales Total]),
@@ -184,6 +185,25 @@ CALCULATE(
         'Total Q4 Regional Sales'[Category_state]
     )
 )
+
+## Conclusiones generales:
+-En nuestro informe final,podemos visualizar una gráfica de barras agrupadas llamada ventas totales por Categoria y estado,lo cual cada vez que seleccionamos una barra según la categoria y estado,nos muestra en las tarjetas,la variación del porcentaje de crecimiento y decrecimiento de las ventas totales por cada categoria y estado,tanto de noviembre a diciembre como los tres meses juntos.
+
+-El producto con mayor crecimiento de ventas durante el trimestre fue para Pets -LA "producto para mascotas en el Estado de Louisiana, EE. UU"
+-El producto con menor crecimiento de ventas durante el trimestre fue para Books - SC "producto libros en el Estado de South Carolina (Carolina del Sur, EE. UU.)
+-El producto más comprado por cliente fué para producto ropa (cloting),el cliente que más gastó en este producto fue Shepherd Charli.
+-EL producto más vendido de todos fué para productos electronicos(Electrónics),sin embargo el que más produjo ganancias fué para cloting.
+-Durante los tres meses hubo un crecimiento de ventas totales de 1,39%,entre Septiembre y Noviembre crecierón 0,95%,entre Noviembre y Diciembre crecieron 0,44%.
+
+## Conclusiones detalladas:
+
+-Los productos para mascotas fuerón los más demandados durante los tres meses,cada vez las personas invierten más para sus mascotas,esto está asociado a que las familias cada vez adoptan y prefieren convivir y tener de familia a un animal que tener hijos.
+-Los productos menos demandados fuerón los libros,podría relacionarse con la preferencia de los clientes de adquirir y leer libros electrónicos o descargarlos gratis en internet,en caso que se traté de libros físicos o que los clientes prefierán pasar su tiempo menos en lectura y más en otros tipos de entretenimietos como las redes.
+-El producto cloting,fué el que generó mas ganancias de todos, los bajos costos de producción y la preferencias de clientes por la vestimenta,inciden en mayor rentabilidad del negocio.
+-Aunque el producto Pets,fue el que más creció en porcentaje en número de ventas en ese tiempo,el producto electronics fué el más vendido,pero no obtuvo las mayores ganancias y puede estar asociado a los costos de producción y materias primas que se utilizan para su producción que pueden variar de precios según el contexto de relaciones y precios comerciales.
+-Creció más las ventas de Septiembre a Noviembre que de Noviembre a Diciembre,se espera que la gente prefiere guardar su dinero para Diciembre,el crecimiento de ventas de Diciembre fue mayor en valor absoluto,claramente por la época.
+
+## Propuesta como analista: El mercado de mascotas cada vez crece más,tiene oportunidades futuras de negocio.El mercado de libros en el Estado de Carolina del Sur,fué donde más decrecierón sus ventas,sin embargo no es general porque en el Estado de Alabama,fué el segundo producto que más genero ventas,es importante segmentar por Estado las familias que prefieren las lecturas o existan mayores centros educativos que aumenten la demanda de libros,para oportunidades de negocios.El producto más vendido durante el trimestre fueron para productos electrónicos sin embargo este no genero mayores ganancias;su relación esta influenciada por los costos de producción,transporte y logística,variación de precios de materias de la cadena productiva y las fluctuaciones en relacion con las exportaciones e importaciones.
 
 ## Tecnologías Utilizadas
 
