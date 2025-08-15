@@ -4,7 +4,7 @@
 
  Sobre mí: 
  Economista con experiencia en modelado estadístico, visualización de datos y machine learning.
- Especializado en análisis de datos para entender fenómenos económicos y de mercado.
+ Especializado en ciencia y analisis de datos con el objetivo de generar soluciones valiosas y eficientes al negocio e impactar de manera positiva a la organzación o       comunidad
  Habilidades en Python, R, SQL, Power BI y Excel avanzado.
  
  Tecnologías y Herramientas:
