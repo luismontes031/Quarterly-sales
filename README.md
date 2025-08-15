@@ -14,5 +14,5 @@
 ✔ Bases de datos: MySQL, PostgreSQL
 
  Contacto:
- [luissanchezmontes31@hotmail.com]
+ [luissanchezmontes31@gmail.com]
  telefono: 3177241966
